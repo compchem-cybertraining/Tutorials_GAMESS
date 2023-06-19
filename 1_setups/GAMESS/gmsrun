@@ -1,0 +1,14 @@
+#!/bin/bash
+
+inpfile="$1"
+
+datfile=$(basename -- "$inpfile")
+datfile="${datfile%.*}"
+datfile="$datfile.dat"
+
+if [ -e $GMSSCR/$datfile ]
+then
+        rm -f $GMSSCR/$datfile
+fi
+
+$GMSPATH/rungms $inpfile 01 16 1

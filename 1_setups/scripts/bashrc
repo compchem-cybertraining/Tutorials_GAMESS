@@ -1,0 +1,47 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+#python env
+module use /projects/academic/cyberwksp21/Modules
+module load jupyter
+eval "$(/projects/academic/cyberwksp21/SOFTWARE/Conda/bin/conda shell.bash hook)"
+conda activate libra2
+unset LD_LIBRARY_PATH
+
+#Intel compilers
+module load intel/20.2
+module load intel-mpi/2020.2
+module load mkl/2020.2
+
+#set scratch directory
+export SCRATCH=$HOME/work-dir
+
+# GAMESS-US env
+export GMSSCR=$SCRATCH/gam-scr
+export GMSPATH=/projects/academic/cyberwksp21/Software/gamess-2018/qmmm-reks-2018-6.3
+export GMSVER=01
+
+# DL-FIND env
+export DLFPATH=/projects/academic/cyberwksp21/Software/dl-find-standalone
+
+#visualization tools
+module load molden/5.9
+module load cuda/5.5.22
+module load vmd/v1.9.2
+
+#pyUNI-xMD env
+export PYUNIXMDHOME=/projects/academic/cyberwksp21/Software/pyUNI-xMD/unixmd-gamess
+export PYTHONPATH=$PYUNIXMDHOME/src:$PYUNIXMDHOME/util:$PYTHONPATH
+export UXMD2GMS=/projects/academic/cyberwksp21/Software/pyUNI-xMD/uxmd2gms
+
+#Newton-X env
+module load nx

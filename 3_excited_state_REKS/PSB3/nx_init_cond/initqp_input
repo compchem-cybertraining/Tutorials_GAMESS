@@ -1,0 +1,15 @@
+&dat
+ nact = 2
+ iprog = 1
+ numat = 14
+ npoints = 500
+ file_geom = geom
+ file_nmodes = force.out
+ anh_f = 1
+ rescale = n
+ temp = 300
+ ics_flg = n
+ chk_e = 0
+ iseed = -1
+ lvprt = 1
+/

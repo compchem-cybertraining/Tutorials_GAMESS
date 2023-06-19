@@ -1,0 +1,24 @@
+&dat
+ NUMAT       = 14
+ NACT        = 2
+ NPOINTS     = 500
+ FILE_GEOM   = geom
+ FILE_NMODES = force.out
+ FILE_OUT    = ini_qv
+ FILE_VIB    = qvector
+ IPROG       = 1
+ CHK_E       = 0
+ PROG        = 6.5
+ EVERT       = 5
+ DE          = 100
+ KVERT       = 1
+ NIS         = 1
+ NFS         = 2
+ NM_FLAG     = 0
+ ANH_F       = 1
+ RESCALE     = n
+ TEMP        = 300
+ ISEED       = -1
+ ICS_FLG     = n
+ LVPRT       = 1
+/

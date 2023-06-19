@@ -1,0 +1,57 @@
+#!/bin/sh
+#SBATCH --partition=valhalla  --qos=valhalla
+#SBATCH --clusters=faculty
+#SBATCH --time=02:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=12
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=128000
+###SBATCH --mail-user=mshakiba@buffalo.edu
+echo "SLURM_JOBID="$SLURM_JOBID
+echo "SLURM_JOB_NODELIST="$SLURM_JOB_NODELIST
+echo "SLURM_NNODES="$SLURM_NNODES
+echo "SLURMTMPDIR="$SLURMTMPDIR
+echo "working directory="$SLURM_SUBMIT_DIR
+
+# Here load whatever which is needed for running CP2K
+
+
+#python env
+module use /projects/academic/cyberwksp21/Modules
+module load jupyter
+eval "$(/projects/academic/cyberwksp21/SOFTWARE/Conda/bin/conda shell.bash hook)"
+conda activate libra2
+unset LD_LIBRARY_PATH
+
+#Intel compilers
+module load intel/20.2
+module load intel-mpi/2020.2
+module load mkl/2020.2
+
+#set scratch directory
+export SCRATCH=$HOME/work-dir
+
+# GAMESS-US env
+export GMSSCR=$SCRATCH/gam-scr
+export GMSPATH=/projects/academic/cyberwksp21/Software/gamess-2018/qmmm-reks-2018-6.3
+export GMSVER=01
+
+# DL-FIND env
+export DLFPATH=/projects/academic/cyberwksp21/Software/dl-find-standalone
+
+#visualization tools
+module load molden/5.9
+module load cuda/5.5.22
+module load vmd/v1.9.2
+
+#pyUNI-xMD env
+export PYUNIXMDHOME=/projects/academic/cyberwksp21/Software/pyUNI-xMD/unixmd-gamess
+export PYTHONPATH=$PYUNIXMDHOME/src:$PYUNIXMDHOME/util:$PYTHONPATH
+export UXMD2GMS=/projects/academic/cyberwksp21/Software/pyUNI-xMD/uxmd2gms
+
+#Newton-X env
+module load nx
+
+gmsrun psb3-s0min-ssr-bhhlyp-6-31gs.inp > psb3-s0min-ssr-bhhlyp-6-31gs.out
+
+
